@@ -1,6 +1,7 @@
 package com.wangtao.nacosprovider.controller;
 
 import com.wangtao.nacosprovider.vo.UserVO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ public class UserController {
 
     private static final Map<Integer, UserVO> MOCK_USERS_MAP;
 
+    @Value("${server.port}")
+    private String serverPort;
+
     static {
         Random random = new Random();
         MOCK_USERS_MAP = IntStream.range(1, 11)
@@ -31,5 +35,10 @@ public class UserController {
     @GetMapping("/{id}")
     public UserVO detailUser(@PathVariable Integer id) {
         return MOCK_USERS_MAP.get(id);
+    }
+
+    @GetMapping("/getServerPort")
+    public String getServerPort() {
+        return serverPort;
     }
 }
