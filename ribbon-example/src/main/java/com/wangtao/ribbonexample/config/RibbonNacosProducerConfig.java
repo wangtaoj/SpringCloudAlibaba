@@ -13,6 +13,7 @@ public class RibbonNacosProducerConfig {
 
     /**
      * 线性轮询策略
+     * Primary注解很重要，不然在创建ILoadBalancer会发生错误，依赖IRule实现，因为无法找到唯一的实现
      */
     @Primary
     @Bean

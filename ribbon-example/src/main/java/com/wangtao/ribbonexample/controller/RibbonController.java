@@ -3,7 +3,6 @@ package com.wangtao.ribbonexample.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +20,6 @@ public class RibbonController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
-    @Autowired
-    private SpringClientFactory springClientFactory;
-
     @GetMapping("/chooseServer")
     public String chooseServer() {
         ServiceInstance serviceInstance = loadBalancerClient.choose("nacos-producer");
@@ -34,7 +30,8 @@ public class RibbonController {
         System.out.println("getScheme: " + serviceInstance.getScheme());
         System.out.println("getUri: " + serviceInstance.getUri());
 
-        URI originalUri = URI.create("https://nacosqqq-producer1/demo");
+        // 将nacos-producer换成具体的IP+端口
+        URI originalUri = URI.create("https://nacos-producer/demo");
         System.out.println(loadBalancerClient.reconstructURI(serviceInstance, originalUri));
         return serviceInstance.getUri().toString();
     }
