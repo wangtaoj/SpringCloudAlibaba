@@ -34,6 +34,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserVO detailUser(@PathVariable Integer id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException(id + "");
+        }
         return MOCK_USERS_MAP.get(id);
     }
 
