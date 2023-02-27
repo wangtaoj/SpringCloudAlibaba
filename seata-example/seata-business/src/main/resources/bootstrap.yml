@@ -39,7 +39,7 @@ meta:
   seata:
     nacos:
       server-addr: 127.0.0.1:8848
-      namespace: c7123a1e-d438-412c-af72-cdf3ab18a547
+      namespace: 1a309f28-39f8-4229-97ee-5bbdd446c3f4
       group: SEATA_GROUP
 
 seata:
